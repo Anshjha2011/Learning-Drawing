@@ -23,7 +23,7 @@ int main(int argc,char* argv[]){
             SDL_Event e;
 
             // Creating Renderer
-            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+            renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
 
             if (renderer == NULL){
                 printf("SDL failed to Create Renderer Error :- %s",SDL_GetError());}
