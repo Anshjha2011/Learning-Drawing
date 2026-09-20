@@ -46,7 +46,13 @@ int main(int argc,char* argv[]){
                         SDL_SetRenderDrawColor(renderer,216,201,168,255);
                         SDL_RenderFillRect(renderer,&first_rectangle);
                         SDL_RenderPresent(renderer);
+                        SDL_Event mouse_in2;
+
+                        if(SDL_PollEvent(&mouse_in2) && mouse_in2.type == SDL_MOUSEBUTTONDOWN){
+                            break;
+                        }
                     }
+                        
 
 
                 }
