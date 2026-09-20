@@ -29,15 +29,31 @@ int main(int argc,char* argv[]){
                 }
                 //This is where the code goes
                 SDL_Event mouse_in;
+                SDL_Rect first_rectangle = {300,200,200,200};
+                int x,y;
+                SDL_GetMouseState(&x,&y);
+                
 
+                while(x >= 300 && x <= 500 && y >= 200 && y <= 400 && Window_Open ){
+                    SDL_GetMouseState(&x,&y);
+
+                    SDL_SetRenderDrawColor(renderer,0,255,0,255);
+                    SDL_RenderFillRect(renderer,&first_rectangle);
+                    SDL_RenderPresent(renderer);
+                    if (SDL_PollEvent(&e) && e.type == SDL_QUIT){
+                    Window_Open = false;
+                }
+
+
+                }
                 SDL_SetRenderDrawColor(renderer,216,201,168,255);
                 SDL_RenderClear(renderer);
-                SDL_Rect first_rectangle = {300,200,200,200};
                 SDL_SetRenderDrawColor(renderer,0,0,255,255);
                 SDL_RenderFillRect(renderer,&first_rectangle);
                 SDL_RenderPresent(renderer);
                 
                 if(SDL_PollEvent(&mouse_in) && mouse_in.type == SDL_MOUSEBUTTONDOWN){
+
                     while (Window_Open){
                         if(SDL_PollEvent(&e) && e.type == SDL_QUIT){
                             Window_Open = false;
