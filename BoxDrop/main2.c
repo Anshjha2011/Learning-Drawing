@@ -30,6 +30,9 @@ int main(int argc,char* argv[]){
                 //Everything Starts From Here, We Will Intialize is_open and SDL_Event for inputs
                 SDL_Event e;
                 bool is_open = true;
+                int rect_num = 0;
+                int x,y;
+                SDL_Rect rectangles[100];
 
                 // Setting up the main loop
                 while(is_open) {
@@ -38,35 +41,33 @@ int main(int argc,char* argv[]){
                         if(e.type == SDL_QUIT){
                             is_open = false;
                         }
+                        if(e.type == SDL_MOUSEBUTTONDOWN){
+                            rect_num++;
+                            SDL_GetMouseState(&x,&y);
+                        }
                     }
 
                     //Draw Background
                     SDL_SetRenderDrawColor(renderer,216,201,168,255);
                     SDL_RenderClear(renderer);
-                    SDL_RenderPresent(renderer);
+                            
+                              
+
+                    // Drawing 100*100 rectangles
+                    rectangles[rect_num-1].x = x;
+                    rectangles[rect_num-1].y = y;
+                    rectangles[rect_num-1].w = 50;
+                    rectangles[rect_num-1].h = 50;
+
+
+
+
                     
-                    // Foreground loop so Drawing Background doesn't clear rectangles
-                    while(is_open){
+                    SDL_SetRenderDrawColor(renderer,0,0,255,255);
+                    SDL_RenderFillRects(renderer,rectangles,rect_num);
+                    SDL_RenderPresent(renderer);
+
                                
-                        // Checking if window is closed or not for breaking the loop
-                        while(SDL_PollEvent(&e)) {
-                            if(e.type == SDL_QUIT){
-                                is_open = false;
-                            }
-                            if(e.type == SDL_MOUSEBUTTONDOWN){
-
-                                // Setting Up variable and storing position of cursor when clicked
-                                int x,y;
-                                SDL_GetMouseState(&x,&y);
-
-                                // Drawing 100*100 rectangle at that location
-                                SDL_Rect rectangle = {x,y,100,100};
-                                SDL_SetRenderDrawColor(renderer,0,0,255,255);
-                                SDL_RenderFillRect(renderer,&rectangle);
-                                SDL_RenderPresent(renderer);
-
-                            }
-                        }   
                 }
             }
 
@@ -82,5 +83,5 @@ int main(int argc,char* argv[]){
     // Shutting SDL systems
     SDL_Quit();
 }
-}
+
 
